@@ -11,7 +11,7 @@ def chat_lumora(user_input, previous_context):
     data = {"model": "lumora", "messages": messages}
     
     try:
-        response = requests.post(OLLAMA_URL, json=data, timeout=20)
+        response = requests.post(OLLAMA_URL, json=data, timeout=50)
         response.raise_for_status()
         answer = response.json()["choices"][0]["message"]["content"]
     except Exception as e:
