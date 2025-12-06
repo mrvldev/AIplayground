@@ -8,7 +8,7 @@ def chat_lumora(user_input, previous_context):
     messages = previous_context[-MAX_HISTORY:]
     messages.append({"role": "user", "content": user_input})
     
-    data = {"model": "lumora", "messages": messages}
+    data = {"model": "lumos", "messages": messages}
     
     try:
         response = requests.post(OLLAMA_URL, json=data, timeout=50)
@@ -24,18 +24,22 @@ def chat_lumora(user_input, previous_context):
 
 context = []
 
-with gr.Blocks(css="""
-    textarea, .gr-textbox {
-        font-size: 18px !important;
-    }
-    .gr-button {
-        font-size: 16px !important;
-    }
-    .gr-textbox[readonly] {
-        font-size: 18px !important;
-    }
-""") as demo:
-    gr.Markdown("<h2 style='text-align:center; color:#2E86C1;'>Lumora – Dein KI-Begleiter</h2>")
+with gr.Blocks() as demo:
+    gr.HTML("""
+    <style>
+        textarea, .gr-textbox {
+            font-size: 18px !important;
+        }
+        .gr-button {
+            font-size: 16px !important;
+        }
+        .gr-textbox[readonly] {
+            font-size: 18px !important;
+        }
+    </style>
+    """)
+
+    gr.Markdown("<h2 style='text-align:center; color:#2E86C1;'>Lumos – Dein KI-Begleiter</h2>")
     gr.Markdown("<p style='text-align:center'>Ruhige, strukturierte Unterstützung für Alltag, Fokus und Planung.</p>")
 
     # Eingabefeld
@@ -47,7 +51,7 @@ with gr.Blocks(css="""
 
     # Antwortfeld
     chat_output = gr.Textbox(
-        label="Lumora antwortet:",
+        label="Lumos antwortet:",
         interactive=False,
         lines=10,
         max_lines=30,
