@@ -3,7 +3,7 @@ import ollama
 response = ollama.list()
 
 res = ollama.chat(
-    model="lumora",
+    model="lumos",
     messages=[
         {"role": "user", "content": "Warum ist da Meer so salzig?"
          },

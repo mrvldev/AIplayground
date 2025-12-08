@@ -8,7 +8,7 @@ def chat_lumora(user_input, previous_context):
     messages = previous_context[-MAX_HISTORY:]
     messages.append({"role": "user", "content": user_input})
     
-    data = {"model": "lumos", "messages": messages}
+    data = {"model": "lumora", "messages": messages}
     
     try:
         response = requests.post(OLLAMA_URL, json=data, timeout=50)
