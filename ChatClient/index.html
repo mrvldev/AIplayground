@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Ollama Chat Client</title>
+  <style>
+    body {
+      background: #1e1e1e;
+      color: #eee;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #chat {
+      height: 70vh;
+      overflow-y: auto;
+      padding: 10px;
+      border: 1px solid #444;
+      margin-bottom: 20px;
+      background: #2a2a2a;
+    }
+    .msg { margin-bottom: 10px; }
+    .user { color: #4fd1ff; }
+    .bot { color: #91ff6e; }
+    #input {
+      width: 80%;
+      padding: 10px;
+      background: #333;
+      border: 1px solid #555;
+      color: #fff;
+    }
+    button {
+      padding: 10px 20px;
+      background: #444;
+      border: 1px solid #666;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Ollama Chat Client</h1>
+
+<div id="chat"></div>
+
+<input id="input" placeholder="Nachricht eingeben..." />
+<button onclick="sendMessage()">Senden</button>
+
+<script>
+async function sendMessage() {
+  const input = document.getElementById("input");
+  const chat = document.getElementById("chat");
+
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  chat.innerHTML += `<div class="msg user"><b>Du:</b> ${msg}</div>`;
+  input.value = "";
+  chat.scrollTop = chat.scrollHeight;
+
+  const res = await fetch("/api/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: msg })
+  });
+
+  const data = await res.json();
+  chat.innerHTML += `<div class="msg bot"><b>Ollama:</b> ${data.response}</div>`;
+  chat.scrollTop = chat.scrollHeight;
+}
+</script>
+
+</body>
+</html>
