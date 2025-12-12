@@ -15,7 +15,7 @@ async function askOllama(prompt) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: "llama3.1",
+      model: "lumora",
       prompt,
       stream: true
     })
