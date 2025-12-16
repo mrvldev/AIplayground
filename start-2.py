@@ -3,9 +3,9 @@ import ollama
 response = ollama.list()
 
 res = ollama.chat(
-    model="lumos",
+    model="lumora",
     messages=[
-        {"role": "user", "content": "Warum ist da Meer so salzig?"
+        {"role": "user", "content": "Wie kannst du helfen?"
          },
          ],
          stream=True
